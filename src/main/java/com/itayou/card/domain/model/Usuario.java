@@ -1,15 +1,15 @@
 package com.itayou.card.domain.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 public class Usuario {
     @EqualsAndHashCode.Include

@@ -22,10 +22,10 @@ class CadastroCartaoServiceTest {
 
     @Test
     void salvarCartao() {
-        Endereco endereco = cadastroUsuarioService.getEnderecoRepository().save(CadastrosMock.builder().build().gerarEndereco());
+        Endereco endereco = cadastroUsuarioService.salvarEndereco(CadastrosMock.builder().build().gerarEndereco());
 
         Usuario usuario = CadastrosMock.builder().build().gerarUsuario(endereco);
-        cadastroUsuarioService.getUsuarioRepository().save(usuario);
+        cadastroUsuarioService.salvarUsuario(usuario);
         Cartao novoCartao = Cartao.builder()
                 .bandeira(Bandeira.VISA).limite(3500.00)
                 .nome(NomeCartao.ITAU_PLATINUM).usuario(usuario).build();

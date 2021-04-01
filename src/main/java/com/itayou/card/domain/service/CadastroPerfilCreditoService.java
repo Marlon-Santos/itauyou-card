@@ -3,7 +3,10 @@ package com.itayou.card.domain.service;
 import com.itayou.card.domain.model.PerfilCredito;
 import com.itayou.card.domain.repository.PerfilCreditoRepository;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,9 +15,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+@Data
 public class CadastroPerfilCreditoService {
-    private final PerfilCreditoRepository perfilCreditoRepository;
+    @Autowired
+    private PerfilCreditoRepository perfilCreditoRepository;
 
     public PerfilCredito encontrarPerfilCredito(Long id) throws Exception {
         if (id == null) {
@@ -46,7 +50,7 @@ public class CadastroPerfilCreditoService {
         }
 
         PerfilCredito perfilCredito = encontrarPerfilCredito(id);
-        BeanUtils.copyProperties(perfilCredito, novoPerfilCredito, "id");
+        BeanUtils.copyProperties(novoPerfilCredito, perfilCredito, "id");
 
         return perfilCreditoRepository.save(perfilCredito);
     }

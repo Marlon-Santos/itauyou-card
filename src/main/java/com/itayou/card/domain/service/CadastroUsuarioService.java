@@ -4,8 +4,11 @@ import com.itayou.card.domain.model.*;
 import com.itayou.card.domain.repository.EnderecoRepository;
 import com.itayou.card.domain.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,11 +17,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
-@Getter
+@Data
 public class CadastroUsuarioService {
-    private final UsuarioRepository usuarioRepository;
-    private final EnderecoRepository enderecoRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     public Usuario encontrarUsuario(Long id) throws Exception {
         if (id == null) {
@@ -58,6 +62,10 @@ public class CadastroUsuarioService {
 
     @Transactional
     public Usuario salvarUsuario(@Valid Usuario usuario) {
+        if (usuario.getEndereco() == null) {
+            usuario.setEndereco(salvarEndereco(new Endereco()));
+        }
+
         return usuarioRepository.save(usuario);
     }
 
@@ -73,7 +81,7 @@ public class CadastroUsuarioService {
         }
 
         Usuario usuario = encontrarUsuario(id);
-        BeanUtils.copyProperties(usuario, novoUsuario, "id");
+        BeanUtils.copyProperties(novoUsuario, usuario, "id");
 
         return usuarioRepository.save(usuario);
     }
@@ -85,7 +93,7 @@ public class CadastroUsuarioService {
         }
 
         Endereco endereco = encontrarEndereco(id);
-        BeanUtils.copyProperties(endereco, novoEndereco, "id");
+        BeanUtils.copyProperties(novoEndereco, endereco, "id");
 
         return enderecoRepository.save(endereco);
     }

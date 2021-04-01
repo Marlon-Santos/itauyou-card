@@ -2,15 +2,15 @@ package com.itayou.card.domain.model;
 
 import com.itayou.card.domain.enums.Bandeira;
 import com.itayou.card.domain.enums.NomeCartao;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 public class Cartao {
     @EqualsAndHashCode.Include

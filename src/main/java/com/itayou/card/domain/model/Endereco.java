@@ -1,17 +1,14 @@
 package com.itayou.card.domain.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 public class Endereco {
     @EqualsAndHashCode.Include
@@ -24,5 +21,4 @@ public class Endereco {
     private String cep;
     private String cidade;
     private String uf;
-
 }

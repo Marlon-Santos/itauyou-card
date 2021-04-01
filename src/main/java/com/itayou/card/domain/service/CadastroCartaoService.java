@@ -7,7 +7,10 @@ import com.itayou.card.domain.repository.CartaoApresentacaoRepository;
 import com.itayou.card.domain.repository.CartaoRepository;
 import com.itayou.card.domain.repository.CartaoSolicitadoRepository;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,11 +19,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+@Data
 public class CadastroCartaoService {
-    private final CartaoRepository cartaoRepository;
-    private final CartaoApresentacaoRepository cartaoApresentacaoRepository;
-    private final CartaoSolicitadoRepository cartaoSolicitadoRepository;
+    @Autowired
+    private CartaoRepository cartaoRepository;
+    @Autowired
+    private CartaoApresentacaoRepository cartaoApresentacaoRepository;
+    @Autowired
+    private CartaoSolicitadoRepository cartaoSolicitadoRepository;
 
     public Cartao encontrarCartaoCadastrado(Long id) throws Exception {
         if (id == null) {

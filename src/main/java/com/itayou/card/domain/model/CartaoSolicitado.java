@@ -1,16 +1,16 @@
 package com.itayou.card.domain.model;
 
 import com.itayou.card.domain.enums.Status;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 public class CartaoSolicitado {
     @EqualsAndHashCode.Include
