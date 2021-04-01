@@ -1,6 +1,7 @@
 package com.itayou.card.domain.model;
 
 import com.itayou.card.domain.enums.Status;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -9,6 +10,7 @@ import java.util.Date;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
 @Entity
 public class CartaoSolicitado {
     @EqualsAndHashCode.Include
@@ -28,5 +30,5 @@ public class CartaoSolicitado {
     private Usuario usuario;
 
     @OneToOne
-    private Cartao cartaoSolicitado;
+    private Cartao cartao;
 }

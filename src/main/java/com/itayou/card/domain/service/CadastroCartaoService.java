@@ -7,7 +7,6 @@ import com.itayou.card.domain.repository.CartaoApresentacaoRepository;
 import com.itayou.card.domain.repository.CartaoRepository;
 import com.itayou.card.domain.repository.CartaoSolicitadoRepository;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Data
 @AllArgsConstructor
 public class CadastroCartaoService {
     private CartaoRepository cartaoRepository;
@@ -89,7 +87,7 @@ public class CadastroCartaoService {
     }
 
     @Transactional
-    public CartaoSolicitado cartaoSolicitado(@Valid CartaoSolicitado cartaoSolicitado) {
+    public CartaoSolicitado salvarCartaoSolicitado(@Valid CartaoSolicitado cartaoSolicitado) {
         return cartaoSolicitadoRepository.save(cartaoSolicitado);
     }
 

@@ -1,27 +1,27 @@
 package com.itayou.card.domain.service;
 
-import com.itayou.card.CardApplication;
+import com.itayou.card.domain.enums.Bandeira;
+import com.itayou.card.domain.enums.NomeCartao;
+import com.itayou.card.domain.mock.CadastrosMock;
 import com.itayou.card.domain.model.Cartao;
-import com.itayou.card.domain.repository.CartaoRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import com.itayou.card.domain.model.Endereco;
+import com.itayou.card.domain.model.Usuario;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 @SpringBootTest
 @ActiveProfiles("test")
 class CadastroCartaoServiceTest {
     @Autowired
     private CadastroCartaoService cadastroCartaoService;
+    @Autowired
+    private CadastroUsuarioService cadastroUsuarioService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void sbeforeAll() {
     }
 
     @AfterEach
@@ -29,13 +29,82 @@ class CadastroCartaoServiceTest {
     }
 
     @Test
+    void salvarCartao() {
+        Endereco endereco = cadastroUsuarioService.getEnderecoRepository().save(CadastrosMock.builder().build().gerarEndereco());
+        Usuario usuario = CadastrosMock.builder().build().gerarUsuario(endereco);
+        cadastroUsuarioService.getUsuarioRepository().save(usuario);
+        Cartao novoCartao = Cartao.builder()
+                .bandeira(Bandeira.VISA).limite(3500.00)
+                .nome(NomeCartao.ITAU_PLATINUM).usuario(usuario).build();
+        Cartao cartao = this.cadastroCartaoService.salvarCartao(novoCartao);
+        Assertions.assertNotNull(cartao.getBandeira());
+    }
+
+    @Test
+    void salvarCartaoApresentacao() {
+    }
+
+    @Test
+    void salvarCartaoSolicitado() {
+    }
+
+    @Test
+    void listarCartoesCadastrados() {
+    }
+
+    @Test
+    void listarCartoesApresentacaoCadastrados() {
+    }
+
+    @Test
+    void listarCartoesSolicitados() {
+    }
+
+    @Test
     void encontrarCartaoCadastrado() {
         System.out.println(cadastroCartaoService);
         try {
             System.out.println(cadastroCartaoService.encontrarCartaoCadastrado(2L));
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
+    }
+
+    @Test
+    void testEncontrarCartaoCadastrado() {
+    }
+
+    @Test
+    void encontrarCartaoApresentacaoCadastrado() {
+    }
+
+    @Test
+    void encontrarCartaoSolicitado() {
+    }
+
+
+    @Test
+    void atualizarCartao() {
+    }
+
+    @Test
+    void atualizarCartaoApresentacao() {
+    }
+
+    @Test
+    void atualizarCartaoSolicitado() {
+    }
+
+    @Test
+    void deletarCartao() {
+    }
+
+    @Test
+    void deletarCartaoApresentacao() {
+    }
+
+    @Test
+    void deletarCartaoSolicitado() {
     }
 }
