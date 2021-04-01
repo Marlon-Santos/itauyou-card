@@ -21,7 +21,7 @@ class CadastroCartaoServiceTest {
     private CadastroUsuarioService cadastroUsuarioService;
 
     @BeforeAll
-    static void sbeforeAll() {
+    static void beforeAll() {
     }
 
     @AfterEach

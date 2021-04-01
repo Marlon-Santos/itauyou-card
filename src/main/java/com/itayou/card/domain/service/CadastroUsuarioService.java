@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Getter
 public class CadastroUsuarioService {
-    private UsuarioRepository usuarioRepository;
-    private EnderecoRepository enderecoRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final EnderecoRepository enderecoRepository;
 }

@@ -18,9 +18,9 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class CadastroCartaoService {
-    private CartaoRepository cartaoRepository;
-    private CartaoApresentacaoRepository cartaoApresentacaoRepository;
-    private CartaoSolicitadoRepository cartaoSolicitadoRepository;
+    private final CartaoRepository cartaoRepository;
+    private final CartaoApresentacaoRepository cartaoApresentacaoRepository;
+    private final CartaoSolicitadoRepository cartaoSolicitadoRepository;
 
     public Cartao encontrarCartaoCadastrado(Long id) throws Exception {
         if (id == null) {
