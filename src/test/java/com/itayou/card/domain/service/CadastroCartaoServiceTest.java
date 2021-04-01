@@ -20,23 +20,18 @@ class CadastroCartaoServiceTest {
     @Autowired
     private CadastroUsuarioService cadastroUsuarioService;
 
-    @BeforeAll
-    static void beforeAll() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void salvarCartao() {
         Endereco endereco = cadastroUsuarioService.getEnderecoRepository().save(CadastrosMock.builder().build().gerarEndereco());
+
         Usuario usuario = CadastrosMock.builder().build().gerarUsuario(endereco);
         cadastroUsuarioService.getUsuarioRepository().save(usuario);
         Cartao novoCartao = Cartao.builder()
                 .bandeira(Bandeira.VISA).limite(3500.00)
                 .nome(NomeCartao.ITAU_PLATINUM).usuario(usuario).build();
+
         Cartao cartao = this.cadastroCartaoService.salvarCartao(novoCartao);
+
         Assertions.assertNotNull(cartao.getBandeira());
     }
 
@@ -62,11 +57,11 @@ class CadastroCartaoServiceTest {
 
     @Test
     void encontrarCartaoCadastrado() {
-        System.out.println(cadastroCartaoService);
         try {
-            System.out.println(cadastroCartaoService.encontrarCartaoCadastrado(2L));
-        } catch (Exception e) {
+            cadastroCartaoService.encontrarCartaoCadastrado(2L);
 
+        } catch (Exception e) {
+            Assertions.assertEquals("Cartao não encontrado", e.getMessage());
         }
 
     }
